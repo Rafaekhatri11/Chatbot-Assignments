@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript</title>
+</head>
+<body>
+        <h1>Substract</h1>
+
+        <input type="number" id="input_1" placeholder="Enter first number" />
+        <br /><br />
+        <input type="number" id="input_2" placeholder="Enter second number" />
+        <br /> <br />
+        <button onclick="add()"> Submit </button>
+
+        <br /><br />
+
+        <div>
+            <h4>Result</h4>
+            <p id="result"></p>
+        </div>
+</body>
+<script>
+    function add(){
+        var input_1 = document.getElementById("input_1").value
+        var input_2 = document.getElementById("input_2").value
+        console.log(Number(input_1)-Number(input_2))
+        document.getElementById("result").innerHTML = Number(input_1)-Number(input_2)
+    }
+</script>
+</html>
