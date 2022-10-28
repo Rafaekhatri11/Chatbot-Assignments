@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ATM</title>
+</head>
+
+<style>
+    table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    td,
+    th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+    }
+
+    tr:nth-child(even) {
+        background-color: #dddddd;
+    }
+</style>
+
+<body>
+
+    <h1>ES6 Condition Checking if else</h1>
+    <hr>
+
+    <form onsubmit="checkPin(); return false">
+
+        <h3>ATM Machine</h3>
+
+        Enter Your Pin :
+        <input type="number" id="userInputPin" required>
+        <button>Confirm</button>
+
+    </form>
+
+    <h4 id="errorMessage"></h4>
+
+    <div id="homeScreen"></div>
+    <div id="withdrawamount"></div>
+    <div id="slip"></div>
+
+
+    <script>
+
+        let moneyBox = 22000; // atm machine money box
+        let cardDailyLimit = 20000;
+        let accountBalance = 50000;
+
+
+        function checkPin() {
+            console.log("i am checking pin ");
+
+            let userInputPin = document.querySelector("#userInputPin").value;
+
+            if (userInputPin.length < 4) {
+                document.querySelector("#errorMessage").innerHTML = 'You Must Enter 4 Digit Number';
+                return;
+
+            }
+
+            if (userInputPin.length > 4) {
+                document.querySelector("#errorMessage").innerHTML = 'You Must Enter 4 Digit Number';
+                return;
+            }
+
+            if (userInputPin === "2222") {
+                
+                document.querySelector("#errorMessage").innerHTML = `Correct pin number ✅`;
+                document.querySelector("#homeScreen").innerHTML = `
+                <form onsubmit="withdraw(); return false">
+                    Enter your amount to withdraw:
+                    <input type="number" id="userInputAmount" required>
+                    <button>WithDraw</button>
+                </form>
+                `
+
+                return;
+            }
+
+
+            if (userInputPin !== "2222") {
+                document.querySelector("#errorMessage").innerHTML = `Incorrect pin number ❌`;
+                return;
+            }
+
+        }
+
+
+        function withdraw() {
+            document.querySelector("#withdrawamount").innerHTML = ``;
+
+            let amount = document.querySelector("#userInputAmount").value;
+
+            
+            if (amount > moneyBox) {
+                console.log("this machine dont have enough money, please try smaller amount");
+                document.querySelector("#withdrawamount").innerHTML = `this machine dont have enough money, please try smaller amount ❌`;
+                document.querySelector("#slip").innerHTML = ``
+
+            }
+            
+            // TODO:  complete this code
+
+            // also check invalid amount, amount should be multiple of 500
+            else if (amount < 500) {
+                document.querySelector("#withdrawamount").innerHTML = `Minimum amount should be 500 ❌`;
+                document.querySelector("#slip").innerHTML = ``
+
+
+            }
+
+            else if ((amount % 500) !== 0) {
+
+                document.querySelector("#withdrawamount").innerHTML = `ATM machine only have 500 and 1000 notes ❌`;
+                document.querySelector("#slip").innerHTML = ``
+
+            }
+
+            else if ((amount % 500) === 0) {
+
+
+                if (amount > cardDailyLimit) {
+                    document.querySelector("#withdrawamount").innerHTML = `Amount limit exceed ❌`;
+                    document.querySelector("#slip").innerHTML = ``
+
+                } else {
+
+
+                    moneyBox -= amount;  // moneyBox = moneyBox - amount
+                    cardDailyLimit -= amount;
+                    accountBalance -= amount;
+               
+                    document.querySelector("#slip").innerHTML = `
+                
+                <table>
+                    <tr>
+                        <th>Description</th>
+                        <th>Debit</th>
+                        <th>Credit</th>
+                        <th>Balance</th>
+                        
+                        </tr>
+                        <tr>
+                            <td id="description"></td>
+                            <td id="debit"></td>
+                            <td id="credit"></td>
+                            <td id="balance"></td>
+                            
+                            </tr>
+                            <tr>
+                                <td id="total">Total</td>
+                                <td></td>
+                        <td></td>
+                        <td id="totalAmount"></td>
+                        
+                        </tr>
+                        
+                        </table>
+                        `
+                    document.querySelector("#withdrawamount").innerHTML = `Successfully withdraw ✅`;
+                    document.querySelector("#description").innerHTML = "Withdraw Amount at Branch XYZ at " + (new Date()).toLocaleDateString("en-US", { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })
+                    document.querySelector("#debit").innerHTML = amount
+                    document.querySelector("#credit").innerHTML = 0
+                    document.querySelector("#balance").innerHTML = accountBalance
+                    document.querySelector("#totalAmount").innerHTML = amount
+
+                }
+
+
+
+
+            }
+
+        }
+
+    </script>
+
+</body>
+
+</html>
