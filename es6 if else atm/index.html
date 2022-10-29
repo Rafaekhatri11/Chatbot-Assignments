@@ -6,49 +6,34 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ATM</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
 </head>
 
-<style>
-    table {
-        font-family: arial, sans-serif;
-        border-collapse: collapse;
-        width: 100%;
-    }
-
-    td,
-    th {
-        border: 1px solid #dddddd;
-        text-align: left;
-        padding: 8px;
-    }
-
-    tr:nth-child(even) {
-        background-color: #dddddd;
-    }
-</style>
 
 <body>
 
     <h1>ES6 Condition Checking if else</h1>
     <hr>
 
-    <form onsubmit="checkPin(); return false">
+    <form onsubmit="checkPin(); return false" class="navbar-form">
 
         <h3>ATM Machine</h3>
 
         Enter Your Pin :
-        <input type="number" id="userInputPin" required>
-        <button>Confirm</button>
-
+  
+    <input type="number" id="userInputPin" class="span2" required>
+    <button type="submit" class="btn">Submit</button>
+ 
     </form>
-
+    <br/>
     <h4 id="errorMessage"></h4>
 
     <div id="homeScreen"></div>
     <div id="withdrawamount"></div>
     <div id="slip"></div>
 
-
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <script src="js/bootstrap.min.js"></script>
     <script>
 
         let moneyBox = 22000; // atm machine money box
@@ -76,10 +61,10 @@
                 
                 document.querySelector("#errorMessage").innerHTML = `Correct pin number ✅`;
                 document.querySelector("#homeScreen").innerHTML = `
-                <form onsubmit="withdraw(); return false">
+                <form onsubmit="withdraw(); return false" class="navbar-form">
                     Enter your amount to withdraw:
-                    <input type="number" id="userInputAmount" required>
-                    <button>WithDraw</button>
+                    <input type="number" id="userInputAmount" class="span2"  required>
+                    <button class="btn">WithDraw</button>
                 </form>
                 `
 
@@ -141,26 +126,26 @@
                
                     document.querySelector("#slip").innerHTML = `
                 
-                <table>
+                <table class="table">
                     <tr>
-                        <th>Description</th>
-                        <th>Debit</th>
-                        <th>Credit</th>
-                        <th>Balance</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Debit</th>
+                        <th scope="col">Credit</th>
+                        <th scope="col">Balance</th>
                         
                         </tr>
                         <tr>
-                            <td id="description"></td>
-                            <td id="debit"></td>
-                            <td id="credit"></td>
-                            <td id="balance"></td>
+                            <td scope="row" id="description"></td>
+                            <td scope="row" id="debit"></td>
+                            <td scope="row" id="credit"></td>
+                            <td scope="row" id="balance"></td>
                             
                             </tr>
                             <tr>
-                                <td id="total">Total</td>
+                                <td scope="row" id="total">Total</td>
                                 <td></td>
                         <td></td>
-                        <td id="totalAmount"></td>
+                        <td scope="row" id="totalAmount"></td>
                         
                         </tr>
                         
