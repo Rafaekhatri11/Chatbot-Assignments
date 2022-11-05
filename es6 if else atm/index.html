@@ -20,12 +20,12 @@
         <h3>ATM Machine</h3>
 
         Enter Your Pin :
-  
-    <input type="number" id="userInputPin" class="span2" required>
-    <button type="submit" class="btn">Submit</button>
- 
+
+        <input type="number" id="userInputPin" class="span2" required>
+        <button type="submit" class="btn">Submit</button>
+
     </form>
-    <br/>
+    <br />
     <h4 id="errorMessage"></h4>
 
     <div id="homeScreen"></div>
@@ -58,7 +58,7 @@
             }
 
             if (userInputPin === "2222") {
-                
+
                 document.querySelector("#errorMessage").innerHTML = `Correct pin number ✅`;
                 document.querySelector("#homeScreen").innerHTML = `
                 <form onsubmit="withdraw(); return false" class="navbar-form">
@@ -85,14 +85,14 @@
 
             let amount = document.querySelector("#userInputAmount").value;
 
-            
+
             if (amount > moneyBox) {
                 console.log("this machine dont have enough money, please try smaller amount");
                 document.querySelector("#withdrawamount").innerHTML = `this machine dont have enough money, please try smaller amount ❌`;
                 document.querySelector("#slip").innerHTML = ``
 
             }
-            
+
             // TODO:  complete this code
 
             // also check invalid amount, amount should be multiple of 500
@@ -123,7 +123,7 @@
                     moneyBox -= amount;  // moneyBox = moneyBox - amount
                     cardDailyLimit -= amount;
                     accountBalance -= amount;
-               
+
                     document.querySelector("#slip").innerHTML = `
                 
                 <table class="table">
